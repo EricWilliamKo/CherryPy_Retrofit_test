@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class Response implements Parcelable {
 //    public static final Parcelable.Creator<Response> CREATOR = new AnswerCreator();
 
-    @SerializedName("fuck")
+    @SerializedName("hi")
     private final String response;
 
     private Response(Parcel in){

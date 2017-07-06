@@ -9,9 +9,12 @@ import os.path
 # Import CherryPy global namespace
 import cherrypy
 import json
+import time
 
 
 class HelloWorld:
+
+    responses = {'hi':'you'}
 
     """ Sample request handler class. """
 
@@ -27,7 +30,7 @@ class HelloWorld:
 
     
     def response(self):
-        return {"fuck":"me"}
+        return {"hi":"me"}
 
 
     @cherrypy.expose
@@ -37,6 +40,31 @@ class HelloWorld:
         data = cherrypy.request.json
         print data
         return self.response()
+
+    @cherrypy.expose
+    def change(self):
+        self.responses = {'hi':'changed'}
+        return "things are changing"
+
+    @cherrypy.expose
+    def goback(self):
+        self.responses = {'hi':'you'}
+        return "back!!"
+
+    @cherrypy.expose
+    # @cherrypy.tools.json_out()
+    def stream(self):
+        cherrypy.response.headers['Content-Type'] = 'text/event-stream'
+        cherrypy.response.headers['Cache-Control'] = 'no-cache'
+        # if not authorized():
+        #     raise cherrypy.NotFound()
+        def content():
+            while True:
+                # yield json.dumps(self.responses)
+                yield 'data: hey \n\n'
+                time.sleep(0.3)
+        return content()
+    stream._cp_config = {'response.stream': True}
 
 
 tutconf = os.path.join(os.path.dirname(__file__), 'myserver.conf')
