@@ -9,5 +9,5 @@ for arg in args['orderList']:
     drink = Drink(**arg)
     drinkList.append(drink)
 
-print drinkList[0].sugar
+print drinkList[0].drink
 print drinkList[1].__dict__

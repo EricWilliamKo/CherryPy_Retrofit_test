@@ -1,16 +1,12 @@
-
-
-class Drink():
-    drink = None
-    ingredients = None
-    sugar = 0
-    ice = 0
-    
-    # def __init__(self, drink,ingredients,sugar,ice):
-    #     self.ice = ice
-    #     self.drink = drink
-    #     self.ingredients = ingredients
-    #     self.sugar = sugar
+class Drink:
 
     def __init__(self, **entries):
+        self.nextMove = None
+        self.ingredients = None
+        self.sugar = 0
+        self.ice = 0
+        self.drink = None
+        self.id = None
+        self.manufacturingProcess = []
         self.__dict__.update(entries)
+        
